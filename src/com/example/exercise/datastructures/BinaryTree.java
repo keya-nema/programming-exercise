@@ -1,6 +1,8 @@
 package com.example.exercise.datastructures;
 
-public class Graph<T> {
+import java.util.ArrayList;
+
+public class BinaryTree<T> {
 
     private class Node {
         T value;
@@ -9,7 +11,6 @@ public class Graph<T> {
     }
 
     private Node rootNode;
-
 
     public void addNode(T value) {
         Node node = new Node();
@@ -21,15 +22,17 @@ public class Graph<T> {
             rootNode = node;
             System.out.println("Adding root node " + rootNode.value);
         } else {
-            iterateGraphAndAddNode(node, rootNode);
+            ArrayList<Node> list = new ArrayList<>();
+            list.add(rootNode);
+            iterateGraphAndAddNode(node, list);
         }
     }
 
-    private boolean iterateGraphAndAddNode(Node node, Node rootNode) {
-        if (rootNode == null) {
+    private boolean iterateGraphAndAddNode(Node node, ArrayList<Node> list) {
+        if (list == null || list.isEmpty()) {
             return false;
         }
-        Node iterNode = rootNode;
+        Node iterNode = list.get(0);
         if (iterNode.left == null) {
             System.out.println("Adding new left node " + node.value + " to " + iterNode.value);
             iterNode.left = node;
@@ -39,9 +42,11 @@ public class Graph<T> {
             iterNode.right = node;
             return true;
         } else {
-            if (!iterateGraphAndAddNode(node, iterNode.left)) {
-                iterateGraphAndAddNode(node, iterNode.right);
-            }
+            // add the left and right node in the order to be traversed
+            list.remove(iterNode);
+            list.add(iterNode.left);
+            list.add(iterNode.right);
+            iterateGraphAndAddNode(node, list);
         }
         return false;
     }
