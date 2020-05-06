@@ -1,6 +1,6 @@
 package com.example.exercise.run;
 
-import com.example.exercise.datastructures.BinaryTree;
+import com.example.exercise.datastructures.tree.BinaryTree;
 
 public class BinaryTreeDemo {
 

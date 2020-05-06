@@ -1,4 +1,4 @@
-package com.example.exercise.datastructures;
+package com.example.exercise.datastructures.tree;
 
 import java.util.ArrayList;
 
